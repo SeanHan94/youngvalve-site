@@ -4,80 +4,215 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>영밸브 Young Valve</title>
-<meta name="description" content="Young Valve(영밸브) — 산업용 밸브 유통 및 모바일 앱 DuoPlan 운영">
+<meta name="description" content="영밸브(Young Valve) — 산업용 밸브 유통. 경기도 안양시 동안구.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #ffffff; --fg: #1b1f24; --muted: #5b6470; --line: #e4e7eb; --accent: #1f5fae; --card: #f6f8fa;
+    --bg: #f4f5f7; --surface: #ffffff; --fg: #15202b; --muted: #5d6875; --line: #dde1e6;
+    --navy: #0f2a44; --navy-2: #173a5c; --accent: #c8102e; --ico: #173a5c;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #111418; --fg: #e8eaed; --muted: #9aa3ad; --line: #2a2f36; --accent: #7fb0ec; --card: #181c21; }
+    :root { --bg: #0d1117; --surface: #151b23; --fg: #e6e9ed; --muted: #9aa4af; --line: #262e38;
+            --navy: #0a1d30; --navy-2: #3d6a96; --accent: #ef4b5f; --ico: #8fb4dc; }
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--fg);
-    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 16px/1.7 "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif; }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  .nav { position: sticky; top: 0; z-index: 10; background: rgba(15, 42, 68, .94); backdrop-filter: blur(8px); color: #fff; }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.15rem; letter-spacing: -0.02em; text-decoration: none; }
+  .brand small { font-weight: 500; font-size: .74rem; color: #b9c6d3; letter-spacing: .12em; }
+  .nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; font-size: .92rem; }
+  .nav ul a { text-decoration: none; color: #d6dfe8; }
+  .nav ul a:hover { color: #fff; }
+
+  .hero { position: relative; overflow: hidden; color: #fff;
+          background: radial-gradient(1000px 480px at 85% 30%, #1d4670, transparent 60%), #0f2a44; }
+  .hero .wrap { position: relative; display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 40px; padding-top: 88px; padding-bottom: 96px; }
+  .eyebrow { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .14em;
+             border-left: 3px solid var(--accent); padding-left: 10px; text-transform: uppercase; }
+  .hero .eyebrow { border-color: #c8102e; }
+  .hero h1 { font-size: clamp(2.1rem, 5vw, 3.3rem); line-height: 1.22; margin: 18px 0 16px; font-weight: 900; letter-spacing: -0.03em; }
+  .hero p { color: #c3cfdb; margin: 0 0 28px; max-width: 34em; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 6px;
+         background: #c8102e; color: #fff; font-weight: 700; text-decoration: none; }
+  .btn:hover { filter: brightness(1.08); }
+  .hero svg.art { width: 100%; max-width: 420px; justify-self: end; }
+  .grid-bg { position: absolute; inset: 0; pointer-events: none; opacity: .07;
+             background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
+             background-size: 48px 48px; -webkit-mask-image: linear-gradient(to bottom, #000, transparent 90%); mask-image: linear-gradient(to bottom, #000, transparent 90%); }
+
+  section { padding: 88px 0; }
+  .sec-head { margin-bottom: 36px; }
+  .sec-head .eyebrow { color: var(--accent); }
+  .sec-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.1rem); margin: 10px 0 0; letter-spacing: -0.02em; font-weight: 900; }
+  .about p { font-size: 1.08rem; color: var(--muted); max-width: 46em; margin: 0 0 12px; }
+  .about p.en { font-size: .95rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--navy-2); border-radius: 10px; padding: 28px 26px; }
+  .card .ico { width: 44px; height: 44px; border-radius: 8px; display: grid; place-items: center;
+               background: rgba(61, 106, 150, .14); color: var(--ico); margin-bottom: 18px; }
+  .card h3 { margin: 0 0 6px; font-size: 1.1rem; }
+  .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  .contact { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .info { display: grid; gap: 22px; align-content: start; }
+  .info > div { display: flex; gap: 14px; align-items: flex-start; }
+  .info svg { flex: none; margin-top: 4px; color: var(--accent); }
+  .info b { display: block; font-size: .82rem; color: var(--muted); font-weight: 500; }
+  .info a { text-decoration: none; font-weight: 700; }
+  .info a:hover { text-decoration: underline; }
+  .info .sub { color: var(--muted); font-size: .9rem; }
+  .cta { border-radius: 10px; background: #0f2a44; color: #fff; padding: 28px;
+         display: flex; flex-direction: column; justify-content: space-between; min-height: 200px; }
+  .cta p { margin: 0; color: #c3cfdb; }
+  .cta .links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .ghost { padding: 10px 16px; border: 1px solid #5d7894; border-radius: 6px; text-decoration: none; font-size: .9rem; }
+  .ghost:hover { background: rgba(255,255,255,.08); }
+
+  footer { padding: 40px 0 56px; color: var(--muted); font-size: .84rem; }
+  footer .co { font-weight: 700; color: var(--fg); margin-bottom: 8px; }
+  footer dl { display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 0 0 10px; }
+  footer dd { display: inline; margin: 0 0 0 6px; color: var(--fg); }
+  footer dt { display: inline; }
+
+  @media (max-width: 820px) {
+    .hero .wrap { grid-template-columns: 1fr; padding-top: 48px; padding-bottom: 64px; }
+    .hero svg.art { justify-self: center; max-width: 280px; order: -1; }
+    .cards, .contact-grid { grid-template-columns: 1fr; }
+    .nav ul { display: none; }
+    section { padding: 64px 0; }
   }
-  main { max-width: 760px; margin: 0 auto; padding: 56px 20px 72px; }
-  header h1 { font-size: 2rem; margin: 0 0 4px; letter-spacing: -0.02em; }
-  header p { margin: 0; color: var(--muted); }
-  section { margin-top: 48px; }
-  h2 { font-size: 1.15rem; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
-  .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
-  .card p { margin: 0 0 12px; color: var(--muted); }
-  .links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0; padding: 0; list-style: none; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; margin: 0; }
-  dt { color: var(--muted); }
-  dd { margin: 0; overflow-wrap: anywhere; }
-  .en { color: var(--muted); font-size: 0.92rem; }
-  footer { margin-top: 64px; color: var(--muted); font-size: 0.85rem; }
-  @media (max-width: 480px) { dl { grid-template-columns: 1fr; gap: 0; } dd { margin-bottom: 10px; } }
 </style>
 </head>
 <body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M7 10 L25 22 L25 10 L7 22 Z" fill="#c8102e"/></svg>
+      영밸브 <small>YOUNG VALVE</small>
+    </a>
+    <ul>
+      <li><a href="#about">회사 소개</a></li>
+      <li><a href="#business">사업 분야</a></li>
+      <li><a href="#contact">문의</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="grid-bg"></div>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Industrial Valve Distribution</span>
+      <h1>산업 현장에 필요한<br>밸브를 정확하게<br>공급합니다</h1>
+      <p>영밸브는 산업용 밸브 유통 기업입니다.<br>
+      Young Valve supplies industrial valves for plants and facilities.</p>
+      <a class="btn" href="#contact">견적 · 문의하기
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <svg class="art" viewBox="0 0 400 260" fill="none" aria-hidden="true">
+      <rect x="0" y="140" width="112" height="44" fill="#173a5c" stroke="#7f98b2" stroke-width="2"/>
+      <rect x="288" y="140" width="112" height="44" fill="#173a5c" stroke="#7f98b2" stroke-width="2"/>
+      <rect x="100" y="126" width="18" height="72" rx="2" fill="#1f4a73" stroke="#9db3c9" stroke-width="2"/>
+      <rect x="282" y="126" width="18" height="72" rx="2" fill="#1f4a73" stroke="#9db3c9" stroke-width="2"/>
+      <path d="M118 118 L200 162 L282 118 L282 206 L200 162 L118 206 Z" fill="#24527f" stroke="#9db3c9" stroke-width="2"/>
+      <circle cx="200" cy="162" r="24" fill="#0f2a44" stroke="#9db3c9" stroke-width="2"/>
+      <rect x="192" y="62" width="16" height="78" fill="#2c5f8f" stroke="#9db3c9" stroke-width="2"/>
+      <rect x="178" y="88" width="44" height="14" rx="2" fill="#1f4a73" stroke="#9db3c9" stroke-width="2"/>
+      <ellipse cx="200" cy="52" rx="76" ry="12" fill="#c8102e"/>
+      <ellipse cx="200" cy="48" rx="76" ry="12" fill="none" stroke="#ff8a99" stroke-width="2"/>
+      <circle cx="200" cy="48" r="9" fill="#0f2a44" stroke="#ff8a99" stroke-width="2"/>
+      <g fill="#9db3c9"><circle cx="109" cy="134" r="3"/><circle cx="109" cy="190" r="3"/><circle cx="291" cy="134" r="3"/><circle cx="291" cy="190" r="3"/></g>
+    </svg>
+  </div>
+</header>
+
 <main>
-  <header>
-    <h1>영밸브 <span class="en">Young Valve</span></h1>
-    <p>산업용 밸브 유통 · 모바일 앱 서비스</p>
-    <p class="en">Industrial valve distribution · Mobile app services</p>
-  </header>
-
-  <section>
-    <h2>회사 소개 <span class="en">About</span></h2>
-    <p>영밸브는 산업용 밸브를 유통하는 회사입니다. 현재 모바일 앱 서비스 DuoPlan을 함께 운영하고 있습니다.</p>
-    <p class="en">Young Valve is a distributor of industrial valves.  We also develop and operate the mobile app DuoPlan.</p>
-  </section>
-
-  <section>
-    <h2>서비스 <span class="en">Apps</span></h2>
-    <div class="card">
-      <h3>DuoPlan</h3>
-      <p>두 사람이 일정과 가계부를 함께 관리하는 커플 공유 앱 (iOS · Android)<br>
-      <span class="en">A shared calendar and household budget app for couples (iOS · Android)</span></p>
-      <ul class="links">
-        <li><a href="https://seanhan94.github.io/duoplan-legal/privacy-policy.html">개인정보처리방침 Privacy Policy</a></li>
-        <li><a href="https://seanhan94.github.io/duoplan-legal/terms-of-service.html">이용약관 Terms of Service</a></li>
-      </ul>
+  <section id="about" class="about">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">About</span><h2>회사 소개</h2></div>
+      <p>영밸브는 경기도 안양에 있는 산업용 밸브 유통 기업입니다. 고객의 현장 조건과 사양에 맞는 밸브를 찾아 신속하고 정확하게 공급합니다.</p>
+      <p class="en">Young Valve is an industrial valve distributor based in Anyang, Gyeonggi-do, Korea. We source and deliver the right valves for each customer's specifications.</p>
     </div>
   </section>
 
-  <section>
-    <h2>회사 정보 <span class="en">Company</span></h2>
-    <dl>
-      <dt>상호 <span class="en">Name</span></dt><dd>영밸브 (Young Valve)</dd>
-      <dt>대표자 <span class="en">CEO</span></dt><dd>한영남 (Youngnam Han)</dd>
-      <dt>사업자등록번호</dt><dd>138-07-57205</dd>
-      <dt>업종 <span class="en">Business</span></dt><dd>산업용 밸브 유통, 모바일 앱 서비스</dd>
-      <dt>통신판매업 신고</dt><dd>제2026-안양동안-1415호</dd>
-      <dt>주소 <span class="en">Address</span></dt><dd>경기도 안양시 동안구 시민대로 277, 세방글로벌시티 1동 1110호 (관양동)<br><span class="en">Rm 1110, 277 Simin-daero, Dongan-gu, Anyang-si, Gyeonggi-do 14054, Republic of Korea</span></dd>
-      <dt>이메일 <span class="en">Email</span></dt><dd><a href="mailto:han@youngvalve.co.kr">han@youngvalve.co.kr</a></dd>
-      <dt>D-U-N-S</dt><dd>688838136</dd>
-    </dl>
+  <section id="business" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Business</span><h2>사업 분야</h2></div>
+      <div class="cards">
+        <div class="card">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
+          <h3>산업용 밸브 유통</h3>
+          <p>현장 용도와 사양에 맞는 산업용 밸브를 공급합니다.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5h10M9 12h10M9 19h10"/><path d="M4 5l1 1 2-2M4 12l1 1 2-2M4 19l1 1 2-2"/></svg></div>
+          <h3>견적 · 사양 상담</h3>
+          <p>필요한 규격과 수량을 알려주시면 견적을 안내해 드립니다.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6h13v10H1z"/><path d="M14 9h4l4 4v3h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></div>
+          <h3>납품</h3>
+          <p>약속한 일정에 맞춰 현장까지 납품합니다.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <footer>© Young Valve All rights reserved.</footer>
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow">Contact</span><h2>견적 · 문의</h2></div>
+      <div class="contact-grid">
+        <div class="info">
+          <div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <span><b>이메일 Email</b><a href="mailto:han@youngvalve.co.kr">han@youngvalve.co.kr</a></span>
+          </div>
+          <div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span><b>주소 Address</b>경기도 안양시 동안구 시민대로 277, 세방글로벌시티 1동 1110호 (관양동)<br>
+            <span class="sub">Rm 1110, 277 Simin-daero, Dongan-gu, Anyang-si, Gyeonggi-do 14054, Korea</span></span>
+          </div>
+        </div>
+        <div class="cta">
+          <p>필요한 품목, 규격, 수량을 메일로 보내주시면 확인 후 회신드립니다.</p>
+          <div class="links">
+            <a class="ghost" href="mailto:han@youngvalve.co.kr?subject=%EA%B2%AC%EC%A0%81%20%EB%AC%B8%EC%9D%98">메일 보내기</a>
+            <a class="ghost" target="_blank" rel="noopener" href="https://map.naver.com/p/search/%EC%95%88%EC%96%91%20%EC%84%B8%EB%B0%A9%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%8B%9C%ED%8B%B0">네이버 지도</a>
+            <a class="ghost" target="_blank" rel="noopener" href="https://map.kakao.com/?q=%EC%95%88%EC%96%91%20%EC%84%B8%EB%B0%A9%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%8B%9C%ED%8B%B0">카카오맵</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div class="co">영밸브 Young Valve</div>
+    <dl>
+      <div><dt>대표자</dt><dd>한영남</dd></div>
+      <div><dt>사업자등록번호</dt><dd>138-07-57205</dd></div>
+      <div><dt>통신판매업 신고</dt><dd>제2026-안양동안-1415호</dd></div>
+      <div><dt>D-U-N-S</dt><dd>688838136</dd></div>
+    </dl>
+    <dl>
+      <div><dt>주소</dt><dd>경기도 안양시 동안구 시민대로 277, 세방글로벌시티 1동 1110호</dd></div>
+      <div><dt>이메일</dt><dd>han@youngvalve.co.kr</dd></div>
+    </dl>
+    © Young Valve. All rights reserved.
+  </div>
+</footer>
 </body>
 </html>
